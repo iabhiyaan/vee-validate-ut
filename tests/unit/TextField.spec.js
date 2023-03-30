@@ -1,10 +1,14 @@
 import { expect } from 'chai'
 import { mount } from '@vue/test-utils'
 import TextField from '@/components/TextField.vue'
-import { Field } from 'vee-validate'
+import { Field , configure, defineRule} from 'vee-validate'
 import flushPromises from 'flush-promises'
+import { required } from '@vee-validate/rules'
 
 describe('TextField.vue', () => {
+
+  defineRule('required', required);
+
   it('show error message when modelValue is empty string and rules is set to required', async () => {
     const wrapper = mount(TextField, {
       props: { modelValue: '' }
@@ -12,11 +16,12 @@ describe('TextField.vue', () => {
     const inputField = wrapper.find('input')
 
     await inputField.setValue('')
-    await inputField.trigger('change')
+    await wrapper.vm.$nextTick()
     await flushPromises()
 
     const errorMessage = wrapper.find('.mt-error')
-    console.log('errorMessage', errorMessage.text());
+    console.log('errorMessage', { m: errorMessage.text() });
     // expect('')
+    expect(errorMessage.text()).to.contain('first name is not valid.')
   })
 })

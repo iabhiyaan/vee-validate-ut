@@ -1,8 +1,10 @@
 <template>
-    <Field v-model="computedModelValue" name="first name" rules="required" v-slot="{ field, errorMessage }">
-        <input v-bind="field" type="text" />
-        <span class="mt-error">{{ errorMessage }}</span>
-    </Field>
+    <div>
+        <Field v-model="computedModelValue" name="first name" rules="required" v-slot="{ field, errorMessage }">
+            <input v-bind="field" type="text" />
+            <span class="mt-error">{{ errorMessage }}</span>
+        </Field>
+    </div>
 </template>
 
 <script setup>
