@@ -1,4 +1,4 @@
-# vee-valiate-test
+# vee-valiate-sample-validation-with-unit-test
 
 ## Project setup
 ```
