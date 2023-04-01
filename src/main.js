@@ -1,10 +1,14 @@
-import { createApp } from 'vue'
-import App from './App.vue'
+import { createApp } from "vue";
+import App from "./App.vue";
 
-import {defineRule} from 'vee-validate'
+import { defineRule } from "vee-validate";
 
-import { required } from '@vee-validate/rules'
+import { required } from "@vee-validate/rules";
 
-defineRule('required', required)
+export function globalValidators() {
+  defineRule("required", required);
+}
 
-createApp(App).mount('#app')
+globalValidators();
+
+createApp(App).mount("#app");

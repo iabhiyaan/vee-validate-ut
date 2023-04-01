@@ -1,11 +1,10 @@
 <template>
   <div>
-    <input
-      v-model="computedModelValue"
-      @blur="onBlur"
-      @change="handleChange"
-      type="text"
-    />
+    <select v-model="computedModelValue" @focusout="onBlur">
+      <option :value="option" :key="i" v-for="(option, i) in options">
+        {{ option }}
+      </option>
+    </select>
     <span v-if="errorMessage" class="mt-error">{{ errorMessage }}</span>
   </div>
 </template>
@@ -23,6 +22,10 @@ const props = defineProps({
   },
   name: {
     type: String,
+  },
+  options: {
+    type: Array,
+    default: () => [],
   },
 });
 
@@ -47,8 +50,10 @@ const computedModelValue = computed({
   },
 });
 
-function onBlur() {
+function onBlur(e) {
+  console.log("blur");
   validate();
   handleBlur();
+  handleChange(e);
 }
 </script>
